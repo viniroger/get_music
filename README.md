@@ -1,18 +1,18 @@
 # Processador de Músicas com yt-dlp
 
-O script Python aqui desenvolvido serve para automatizar o download e tratamento de arquivos de áudio a partir de URLs (principalmente YouTube), usando o utilitário [yt-dlp](https://www.monolitonimbus.com.br/extraindo-audio-de-videos-com-tags/). O código foi projetado para ser executado tanto em ambiente padrão do sistema quanto em ambientes isolados via **Conda**, quando necessário.
+O script Python aqui desenvolvido serve para automatizar o download e tratamento de arquivos de áudio a partir de URLs (principalmente YouTube), usando o utilitário [yt-dlp](https://github.com/yt-dlp/yt-dlp). O código foi projetado para ser executado tanto em ambiente padrão do sistema quanto em ambientes isolados via **Conda**, quando necessário. Veja mais também no post [Extraindo áudio de vídeos com tags](https://www.monolitonimbus.com.br/extraindo-audio-de-videos-com-tags).
 
 ## 1. Visão Geral do Sistema
 
 O script implementa uma **interface de linha de comando (CLI)** que permite dois modos principais de execução:
 
 1. **Modo A** – Processamento manual de um único item:
-   O usuário fornece um `url`, `artist` e `title` diretamente pelos argumentos da CLI.
+   O usuário fornece um `url`, `artist` e `title` diretamente pelos argumentos da CLI. Ex: `python get_music.py --url https://www.youtube.com/watch?v=ID --artist "Nome do artista" --title "Nome da música"`
 
 2. **Modo B** – Processamento múltiplo a partir de playlist:
-   O script lê um arquivo `playlist.csv` contendo colunas `url,artist,title` e processa cada linha de forma independente.
+   O script lê um arquivo `playlist.csv` contendo colunas `url,artist,title` e processa cada linha de forma independente. Ex: `python get_music.py --playlist /home/user/Downloads/playlist.csv`
 
-O objetivo central é garantir que o **yt-dlp** seja executado de forma segura e isolada, impedindo que falhas gerem arquivos erroneamente movidos, sobrescritos ou processados parcialmente.
+O objetivo central é garantir que o **yt-dlp** seja executado de forma segura e isolada, impedindo que falhas gerem arquivos erroneamente movidos, sobrescritos ou processados parcialmente. Para montar a playlist, você pode usar a biblioteca **pytube**, que lê playlists do YouTube sem precisar de API key.
 
 ## 2. Módulos e Dependências
 
@@ -201,3 +201,8 @@ O design atual permite facilmente adicionar:
 
 Disclaimer: O uso do yt-dlp deve ser sempre realizado em conformidade com as leis de direitos autorais e com os termos de serviço das plataformas de origem. O software em si é uma ferramenta legítima de código aberto, mas baixar ou distribuir conteúdo protegido sem autorização pode violar a legislação aplicável ou os termos de uso dos serviços acessados. Utilize-o apenas para conteúdos de sua autoria, de domínio público, licenciados para download ou cuja permissão explícita tenha sido concedida. O usuário é o único responsável por assegurar que seu uso esteja em plena conformidade legal.
 
+## 8. Sincronização de arquivos (EXTRA)
+
+Após salvar os arquivos em seu computador Linux, talvez queria sincronizar a pasta de músicas com um ou mais celulares. Isso pode ser feito através do RSYNC via rede usando protocolo SSH. Isso envolve instalar um servidor SSH no celular (através do Termux, por exemplo) e rsync, mais algumas configurações - todo o processo é detalhado no post [Transferir arquivos entre Linux e Android](https://www.monolitonimbus.com.br/transferir-arquivos-entre-linux-e-android/).
+
+Após esses procedimentos, poderá usar o script sync_music.sh, bastando apenas personalizar as variáveis.
