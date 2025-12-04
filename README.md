@@ -12,7 +12,7 @@ O script implementa uma **interface de linha de comando (CLI)** que permite dois
 2. **Modo B** – Processamento múltiplo a partir de playlist:
    O script lê um arquivo `playlist.csv` contendo colunas `url,artist,title` e processa cada linha de forma independente. Ex: `python get_music.py --playlist /home/user/Downloads/playlist.csv`
 
-O objetivo central é garantir que o **yt-dlp** seja executado de forma segura e isolada, impedindo que falhas gerem arquivos erroneamente movidos, sobrescritos ou processados parcialmente. Para montar a playlist, você pode usar a biblioteca **pytube**, que lê playlists do YouTube sem precisar de API key.
+O objetivo central é garantir que o **yt-dlp** seja executado de forma segura e isolada, impedindo que falhas gerem arquivos erroneamente movidos, sobrescritos ou processados parcialmente. Para montar a playlist, use o script create_playlist.
 
 ## 2. Módulos e Dependências
 
@@ -201,7 +201,11 @@ O design atual permite facilmente adicionar:
 
 Disclaimer: O uso do yt-dlp deve ser sempre realizado em conformidade com as leis de direitos autorais e com os termos de serviço das plataformas de origem. O software em si é uma ferramenta legítima de código aberto, mas baixar ou distribuir conteúdo protegido sem autorização pode violar a legislação aplicável ou os termos de uso dos serviços acessados. Utilize-o apenas para conteúdos de sua autoria, de domínio público, licenciados para download ou cuja permissão explícita tenha sido concedida. O usuário é o único responsável por assegurar que seu uso esteja em plena conformidade legal.
 
-## 8. Sincronização de arquivos (EXTRA)
+## 8. Criar playlist
+
+Para montar a playlist, você pode usar a biblioteca **pytube**, que lê playlists do YouTube sem precisar de API key, ou também o **yt-dlp**. O script `create_playlist.py` utiliza a biblioteca `yt-dlp` para acessar, de forma rápida e confiável, os metadados de uma playlist do YouTube sem precisar baixar os vídeos. Primeiro, ele configura o `yt-dlp` para operar no modo *extract_flat*, que obtém apenas informações básicas de cada item da playlist. Em seguida, o script coleta a lista de entradas (vídeos) e, para cada uma, reconstrói a URL do vídeo e separa o título em **artista** e **nome da música**, usando como padrão a divisão por `" - "`. Após extrair esses campos, ele grava tudo em um arquivo CSV contendo três colunas: URL, artista e título. Dessa forma, a automação permite transformar uma playlist do YouTube em uma tabela organizada e estruturada, útil para catalogação, análise ou integração com outros sistemas.
+
+## 9. Sincronização de arquivos (EXTRA)
 
 Após salvar os arquivos em seu computador Linux, talvez queria sincronizar a pasta de músicas com um ou mais celulares. Isso pode ser feito através do RSYNC via rede usando protocolo SSH. Isso envolve instalar um servidor SSH no celular (através do Termux, por exemplo) e rsync, mais algumas configurações - todo o processo é detalhado no post [Transferir arquivos entre Linux e Android](https://www.monolitonimbus.com.br/transferir-arquivos-entre-linux-e-android/).
 
