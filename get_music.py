@@ -12,9 +12,9 @@ import sys
 # CONFIGURAÇÃO DO AMBIENTE
 # ============================
 # Se quiser usar um ambiente Conda específico:
-CONDA_ENV = "py13"
-# Se quiser usar o ambiente padrão do sistema (sem conda):
-# CONDA_ENV = None
+#CONDA_ENV = "py13"
+# Se quiser usar o ambiente padrão:
+CONDA_ENV = None
 # ============================
 
 def baixar(url, artist, title, ext="opus"):
